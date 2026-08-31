@@ -3,14 +3,14 @@
 /* ------------------------------------------------------------------
    Design tokens
    The whole visual system lives here. Change these and the entire
-   page follows — nothing below hardcodes a brand color.
+   page follows. Nothing below hardcodes a brand color.
    ------------------------------------------------------------------ */
 @theme {
   /* Fonts */
   --font-display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif;
   --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
 
-  /* Base — gunmetal, not pure black. Pure black reads flat on phones. */
+  /* Base: gunmetal, not pure black. Pure black reads flat on phones. */
   --color-ink-950: #080b0f;
   --color-ink-900: #0d1218;
   --color-ink-850: #121922;
@@ -24,19 +24,19 @@
   --color-steel-300: #aebcc9;
   --color-steel-200: #d2dbe4;
 
-  /* Brand blue — pulled from the Squeejit bottle label */
+  /* Brand blue, pulled from the Squeejit bottle label */
   --color-brand-300: #7cc6ff;
   --color-brand-400: #38a3ff;
   --color-brand-500: #0b84ef;
   --color-brand-600: #0566c2;
   --color-brand-700: #044c93;
 
-  /* Hazard orange — secondary punch, used sparingly for emphasis */
+  /* Hazard orange: secondary punch, used sparingly for emphasis */
   --color-hazard-400: #ff9147;
   --color-hazard-500: #ff6a13;
   --color-hazard-600: #d94f00;
 
-  /* Trail tan — dirt/mud accents in textures and rules */
+  /* Trail tan: dirt/mud accents in textures and rules */
   --color-mud-500: #8a7550;
 
   /* Shared shadows */
@@ -127,7 +127,7 @@
     background: var(--color-brand-500);
   }
 
-  /* Angled section edge — the core "sporty" move. Applied to a section
+  /* Angled section edge, the core "sporty" move. Applied to a section
      so its top edge cuts on a diagonal instead of sitting flat. */
   .cut-top {
     clip-path: polygon(0 3.5vw, 100% 0, 100% 100%, 0 100%);
@@ -153,7 +153,7 @@
 }
 
 /* ------------------------------------------------------------------
-   Textures — layered as background images so no asset files are needed
+   Textures, layered as background images so no asset files are needed
    ------------------------------------------------------------------ */
 @utility texture-grain {
   position: relative;
@@ -174,7 +174,7 @@
   );
 }
 
-/* Diagonal hazard stripes — used on thin divider bars. */
+/* Diagonal hazard stripes, used on thin divider bars. */
 @utility texture-hazard {
   background-image: repeating-linear-gradient(
     -45deg,
@@ -186,7 +186,7 @@
 }
 
 /* ------------------------------------------------------------------
-   Motion — reveal-on-scroll, wired up in BaseLayout
+   Motion: reveal-on-scroll, wired up in BaseLayout
    ------------------------------------------------------------------ */
 @layer utilities {
   .reveal {

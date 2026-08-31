@@ -3,14 +3,14 @@
  *
  * This is deliberately the only file a non-developer needs to touch to
  * change wording, pricing, specs or FAQ answers. All copy below is
- * PLACEHOLDER pending client review — see README for the sign-off list.
+ * PLACEHOLDER pending client review. See README for the sign-off list.
  */
 
 export const site = {
   name: "Squeejit",
   tagline: "Trailside windshield rescue",
   description:
-    "One bottle. Scrubber, squeegee and cleaner in your hand — clear a mud-blind windshield in under a minute, anywhere the trail takes you.",
+    "One bottle. Scrubber, squeegee and cleaner in your hand, so you can clear a mud-blind windshield in under a minute, anywhere the trail takes you.",
   // TODO(client): confirm before launch
   email: "hello@squeejit.com",
   social: {
@@ -18,6 +18,15 @@ export const site = {
     youtube: "https://youtube.com/",
     facebook: "https://facebook.com/",
   },
+};
+
+/**
+ * Build credit shown in the footer. The wordmark itself lives in
+ * Footer.astro, since the markup splits it to highlight the pun. Set `url`
+ * here to turn the credit into a link.
+ */
+export const credit = {
+  url: "",
 };
 
 export const nav = [
@@ -33,7 +42,7 @@ export const hero = {
   headlinePre: "Mud on,",
   headlineSlash: "mud off.",
   sub:
-    "The trail doesn't come with a car wash. Squeejit puts cleaner, a scrubber and a squeegee in one bottle that rides in your door pocket — so a blind windshield costs you sixty seconds, not the rest of the day.",
+    "The trail doesn't come with a car wash. Squeejit puts cleaner, a scrubber and a squeegee in one bottle that rides in your door pocket. A blind windshield costs you sixty seconds, not the rest of the day.",
   primaryCta: "Get yours",
   secondaryCta: "See how it works",
   // Short trust markers under the CTA row
@@ -48,7 +57,7 @@ export const problem = {
   eyebrow: "The problem",
   heading: "Ten miles in, you can't see a thing",
   body:
-    "One water crossing, one truck ahead of you, one bad line through a rut — and your windshield goes opaque. A dry rag smears it. A water bottle spreads it around. A shop towel from the toolbox puts scratches in the glass you'll be looking through for years.",
+    "One water crossing, one truck ahead of you, one bad line through a rut, and your windshield goes opaque. A dry rag smears it. A water bottle spreads it around. A shop towel from the toolbox puts scratches in the glass you'll be looking through for years.",
   kicker:
     "Every UTV has a toolkit, a first aid kit and a recovery strap. Nobody packs a bucket and a sponge.",
 };
@@ -58,7 +67,7 @@ export const steps = [
     n: "01",
     title: "Squirt",
     body:
-      "Flip the cap and lay a line of cleaner across the glass. The twist-top puts it exactly where you want it — no wind-blown spray, no wasted product.",
+      "Flip the cap and lay a line of cleaner across the glass. The twist-top puts it exactly where you want it. No wind-blown spray, no wasted product.",
   },
   {
     n: "02",
@@ -84,7 +93,7 @@ export const anatomy = {
     {
       label: "Twist-top cap",
       detail: "One-handed open and close, even in gloves. Seals tight against vibration.",
-      // Percentage position over the product image — tune once real photo lands
+      // Percentage position over the product image. Tune once the real photo lands
       x: 52,
       y: 12,
     },
@@ -257,7 +266,7 @@ export const faq = [
   },
   {
     q: "Does it work on dried-on mud?",
-    a: "Yes — that's what the scrubber is for. Lay down cleaner, let it sit for fifteen seconds to soften the crust, then scrub and squeegee.",
+    a: "Yes, that's what the scrubber is for. Lay down cleaner, let it sit for fifteen seconds to soften the crust, then scrub and squeegee.",
   },
   {
     q: "Will it freeze in the winter?",
