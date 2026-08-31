@@ -1,0 +1,86 @@
+---
+import SectionHeading from "../components/SectionHeading.astro";
+import Icon from "../components/Icon.astro";
+import { buy } from "../data/product";
+---
+
+<section id="buy" class="relative overflow-hidden bg-ink-900 py-20 lg:py-28">
+  <div
+    class="absolute left-1/2 top-0 -z-0 h-[40rem] w-[40rem] -translate-x-1/2 rounded-full bg-brand-600/15 blur-[130px]"
+  >
+  </div>
+
+  <div class="shell relative">
+    <SectionHeading eyebrow={buy.eyebrow} heading={buy.heading} align="center" />
+
+    <ul class="mt-14 grid items-start gap-6 lg:grid-cols-3">
+      {
+        buy.options.map((option, i) => (
+          <li
+            class:list={[
+              "reveal relative flex flex-col border bg-ink-850 p-8",
+              option.featured
+                ? "border-brand-500 shadow-[var(--shadow-glow)] lg:-mt-4 lg:pb-12"
+                : "border-ink-700",
+            ]}
+            style={`transition-delay: ${i * 80}ms`}
+          >
+            {option.badge && (
+              <span class="absolute -top-3 left-8 bg-hazard-500 px-3 py-1 font-display text-xs font-bold uppercase tracking-[0.16em] text-ink-950">
+                {option.badge}
+              </span>
+            )}
+
+            <h3 class="text-3xl text-white">{option.name}</h3>
+            <p class="mt-1.5 text-steel-400">{option.blurb}</p>
+
+            <p class="mt-6 flex items-baseline gap-3">
+              <span class="font-display text-5xl font-extrabold leading-none text-white">
+                {option.price}
+              </span>
+              {option.compareAt && (
+                <span class="text-lg text-steel-500 line-through">{option.compareAt}</span>
+              )}
+            </p>
+
+            <ul class="mt-7 flex flex-1 flex-col gap-3">
+              {option.includes.map((line) => (
+                <li class="flex items-start gap-2.5 text-steel-300">
+                  <Icon name="check" class="mt-1 h-4 w-4 shrink-0 text-brand-400" />
+                  <span>{line}</span>
+                </li>
+              ))}
+            </ul>
+
+            {/*
+              PLACEHOLDER CHECKOUT.
+              TODO(commerce): wire to the chosen platform. For Shopify, swap
+              this for a buy-button embed keyed to the variant ID. For Stripe,
+              make it an <a> to the payment link. Until then it is a disabled
+              button so nobody mistakes the page for a live store.
+            */}
+            <button
+              type="button"
+              disabled
+              data-sku={option.id}
+              class:list={[
+                "mt-8 w-full cursor-not-allowed px-6 py-4 font-display text-lg font-bold uppercase tracking-wider transition [clip-path:polygon(0.75rem_0,100%_0,100%_calc(100%-0.75rem),calc(100%-0.75rem)_100%,0_100%,0_0.75rem)]",
+                option.featured
+                  ? "bg-brand-500 text-white opacity-70"
+                  : "border-2 border-ink-600 text-steel-300 opacity-70",
+              ]}
+            >
+              Add to cart
+            </button>
+
+            <p class="mt-2 text-center text-xs uppercase tracking-[0.16em] text-steel-500">
+              Checkout not yet connected
+            </p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="reveal mt-10 text-center text-sm text-steel-400">{buy.note}</p>
+  </div>
+</section>

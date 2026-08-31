@@ -1,0 +1,27 @@
+---
+import CtaButton from "../components/CtaButton.astro";
+import { finalCta } from "../data/product";
+---
+
+<section class="relative overflow-hidden bg-ink-900">
+  <div class="texture-hazard h-1.5 w-full opacity-80"></div>
+
+  <div
+    class="absolute inset-0 bg-gradient-to-br from-brand-700/40 via-ink-900 to-ink-900"
+    aria-hidden="true"
+  >
+  </div>
+  <div class="texture-topo absolute inset-0 opacity-50"></div>
+
+  <div class="shell relative py-20 text-center lg:py-28">
+    <h2 class="reveal text-5xl sm:text-6xl lg:text-7xl">{finalCta.heading}</h2>
+
+    <p class="reveal mx-auto mt-6 max-w-xl text-lg leading-relaxed text-steel-300">
+      {finalCta.body}
+    </p>
+
+    <div class="reveal mt-10">
+      <CtaButton href="#buy" size="lg">{finalCta.cta}</CtaButton>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,48 @@
+---
+import SectionHeading from "../components/SectionHeading.astro";
+import Icon from "../components/Icon.astro";
+import { reviews } from "../data/product";
+---
+
+<section
+  id="reviews"
+  class="cut-top relative -mt-[3.5vw] overflow-hidden bg-ink-950 pb-20 pt-[calc(3.5vw+5rem)] lg:pb-28"
+>
+  <div class="texture-topo absolute inset-0 opacity-40"></div>
+
+  <div class="shell relative">
+    <SectionHeading eyebrow={reviews.eyebrow} heading={reviews.heading} align="center" />
+
+    <ul class="mt-14 grid gap-6 lg:grid-cols-3">
+      {
+        reviews.items.map((review, i) => (
+          <li
+            class="reveal flex flex-col border border-ink-700 bg-ink-900 p-8"
+            style={`transition-delay: ${i * 80}ms`}
+          >
+            <div class="flex gap-1 text-hazard-400" aria-label={`${review.rating} out of 5 stars`}>
+              {Array.from({ length: review.rating }).map(() => (
+                <Icon name="star" class="h-5 w-5" />
+              ))}
+            </div>
+
+            <blockquote class="mt-5 flex-1 text-lg leading-relaxed text-steel-200">
+              &ldquo;{review.quote}&rdquo;
+            </blockquote>
+
+            <figcaption class="mt-6 border-t border-ink-700 pt-5">
+              <p class="font-display text-lg uppercase text-white">{review.name}</p>
+              <p class="text-sm text-steel-500">{review.location}</p>
+            </figcaption>
+          </li>
+        ))
+      }
+    </ul>
+
+    <!--
+      Reviews above are placeholders. Real, attributable reviews must
+      replace them before this page goes live — invented testimonials are
+      an FTC problem, not just a credibility one.
+    -->
+  </div>
+</section>

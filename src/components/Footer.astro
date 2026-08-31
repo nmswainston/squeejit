@@ -1,0 +1,78 @@
+---
+import Logo from "./Logo.astro";
+import { site, nav } from "../data/product";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-ink-800 bg-ink-950">
+  <div class="texture-hazard h-1.5 w-full opacity-80"></div>
+
+  <div class="shell grid gap-12 py-16 md:grid-cols-[2fr_1fr_1fr]">
+    <div>
+      <Logo />
+      <p class="mt-4 max-w-sm text-sm leading-relaxed text-steel-500">
+        {site.description}
+      </p>
+    </div>
+
+    <div>
+      <h3 class="text-sm tracking-[0.2em] text-steel-300">Explore</h3>
+      <ul class="mt-4 flex flex-col gap-2.5">
+        {
+          nav.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="text-sm text-steel-500 transition-colors hover:text-brand-400"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="text-sm tracking-[0.2em] text-steel-300">Contact</h3>
+      <ul class="mt-4 flex flex-col gap-2.5 text-sm text-steel-500">
+        <li>
+          <a
+            href={`mailto:${site.email}`}
+            class="transition-colors hover:text-brand-400">{site.email}</a
+          >
+        </li>
+        <li>
+          <a href={site.social.instagram} class="transition-colors hover:text-brand-400"
+            >Instagram</a
+          >
+        </li>
+        <li>
+          <a href={site.social.youtube} class="transition-colors hover:text-brand-400"
+            >YouTube</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-ink-800">
+    <div
+      class="shell flex flex-col gap-3 py-6 text-xs text-steel-500 sm:flex-row sm:items-center sm:justify-between"
+    >
+      <p>&copy; {year} {site.name}. All rights reserved.</p>
+      <p class="text-steel-500">
+        <!-- TODO(client): link real policy pages before launch -->
+        <a href="#" class="hover:text-steel-300">Privacy</a>
+        <span class="px-2">/</span>
+        <a href="#" class="hover:text-steel-300">Terms</a>
+        <span class="px-2">/</span>
+        <a href="#" class="hover:text-steel-300">Shipping &amp; Returns</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- Bottom padding so the sticky mobile bar never covers the footer links -->
+  <div class="h-20 lg:hidden"></div>
+</footer>

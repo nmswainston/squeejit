@@ -1,0 +1,43 @@
+---
+/**
+ * Inline icon set. Kept as inline SVG rather than an icon library so the
+ * page ships zero extra JS and the strokes inherit currentColor.
+ */
+interface Props {
+  name: string;
+  class?: string;
+}
+
+const { name, class: className = "h-6 w-6" } = Astro.props;
+
+const paths: Record<string, string> = {
+  bolt: "M13 2 4.5 13.5H11l-1 8.5 8.5-11.5H12l1-8.5Z",
+  hand: "M8 12V5.5a1.5 1.5 0 0 1 3 0V11m0-1V4.5a1.5 1.5 0 0 1 3 0V11m0-.5V6a1.5 1.5 0 0 1 3 0v7a7 7 0 0 1-7 7h-1a6 6 0 0 1-6-6v-3a1.5 1.5 0 0 1 3 0v1.5",
+  box: "M3 8.5 12 3l9 5.5v7L12 21l-9-5.5v-7Zm0 0 9 5.5m0 0 9-5.5m-9 5.5V21",
+  drop: "M12 3s6 6.4 6 10.5a6 6 0 0 1-12 0C6 9.4 12 3 12 3Z",
+  recycle:
+    "M7 6 4 11l4 1M17 6l3 5-4 1M12 21l-3-4 4-2M9 4h6l2.5 4M15 20H9l-2.5-4M4.5 12.5 3 16l4 1",
+  shield: "M12 3 4 6v6c0 4.5 3.3 8.3 8 9 4.7-.7 8-4.5 8-9V6l-8-3Zm-3 9 2 2 4-4",
+  check: "m4 12.5 5 5 11-11",
+  star: "m12 3 2.7 5.9 6.3.7-4.7 4.4 1.3 6.4L12 17.3 6.4 20.4l1.3-6.4L3 9.6l6.3-.7L12 3Z",
+  plus: "M12 5v14M5 12h14",
+  menu: "M4 7h16M4 12h16M4 17h16",
+  close: "M6 6l12 12M18 6 6 18",
+};
+
+const d = paths[name] ?? paths.check;
+const filled = name === "star";
+---
+
+<svg
+  class={className}
+  viewBox="0 0 24 24"
+  fill={filled ? "currentColor" : "none"}
+  stroke={filled ? "none" : "currentColor"}
+  stroke-width="1.8"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+>
+  <path d={d}></path>
+</svg>

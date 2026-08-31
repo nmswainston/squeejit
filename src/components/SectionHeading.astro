@@ -1,0 +1,30 @@
+---
+interface Props {
+  eyebrow?: string;
+  heading: string;
+  body?: string;
+  align?: "left" | "center";
+  class?: string;
+}
+
+const { eyebrow, heading, body, align = "left", class: className = "" } = Astro.props;
+const isCenter = align === "center";
+---
+
+<div
+  class:list={[
+    "reveal max-w-3xl",
+    isCenter && "mx-auto text-center",
+    className,
+  ]}
+>
+  {eyebrow && (
+    <p class:list={["eyebrow", isCenter && "justify-center"]}>{eyebrow}</p>
+  )}
+
+  <h2 class="mt-4 text-4xl sm:text-5xl lg:text-6xl">{heading}</h2>
+
+  {body && (
+    <p class="mt-5 text-lg leading-relaxed text-steel-400">{body}</p>
+  )}
+</div>

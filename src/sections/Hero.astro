@@ -1,0 +1,81 @@
+---
+import CtaButton from "../components/CtaButton.astro";
+import ImageSlot from "../components/ImageSlot.astro";
+import Icon from "../components/Icon.astro";
+import { hero } from "../data/product";
+---
+
+<section id="top" class="relative isolate overflow-hidden pt-20">
+  <!-- Background stack: base gradient, topo texture, blue bloom -->
+  <div class="absolute inset-0 -z-10 bg-gradient-to-b from-ink-900 via-ink-950 to-ink-950"></div>
+  <div class="texture-topo absolute inset-0 -z-10 opacity-60"></div>
+  <div
+    class="absolute -right-1/4 top-0 -z-10 h-[70vh] w-[70vw] rounded-full bg-brand-600/20 blur-[120px]"
+  >
+  </div>
+
+  <div class="shell grid items-center gap-12 py-16 lg:grid-cols-2 lg:gap-16 lg:py-24">
+    <!-- Copy column -->
+    <div class="reveal is-visible">
+      <p class="eyebrow">{hero.eyebrow}</p>
+
+      <h1 class="mt-6 text-5xl leading-[0.9] sm:text-6xl lg:text-7xl xl:text-8xl">
+        {hero.headlinePre}<br />
+        <span class="slash mt-2 whitespace-nowrap"><span>{hero.headlineSlash}</span></span>
+      </h1>
+
+      <p class="mt-7 max-w-xl text-lg leading-relaxed text-steel-300 sm:text-xl">
+        {hero.sub}
+      </p>
+
+      <div class="mt-9 flex flex-wrap items-center gap-4">
+        <CtaButton href="#buy" size="lg">{hero.primaryCta}</CtaButton>
+        <CtaButton href="#how-it-works" size="lg" variant="ghost">
+          {hero.secondaryCta}
+        </CtaButton>
+      </div>
+
+      <ul class="mt-9 flex flex-wrap gap-x-7 gap-y-3">
+        {
+          hero.trust.map((item) => (
+            <li class="flex items-center gap-2 text-sm text-steel-400">
+              <Icon name="check" class="h-4 w-4 shrink-0 text-brand-400" />
+              {item}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <!-- Product column -->
+    <div class="reveal is-visible relative">
+      <!-- Angled accent panel behind the product shot -->
+      <div
+        class="absolute -inset-3 -z-10 bg-gradient-to-br from-brand-500/50 via-brand-700/20 to-transparent [clip-path:polygon(6%_0,100%_4%,94%_100%,0_96%)] sm:-inset-5"
+      >
+      </div>
+
+      <ImageSlot
+        src={undefined}
+        loading="eager"
+        ratio="4 / 5"
+        alt="Squeejit bottle held against a mud-covered UTV windshield"
+        note="HERO SHOT — the bottle in a gloved hand, mid-squeegee, cutting a clean stripe through a muddy UTV windshield. Shoot late afternoon, dust in the air. Vertical crop."
+        class="w-full"
+      />
+
+      <!-- Floating stat card -->
+      <div
+        class="absolute -bottom-6 left-4 border border-ink-700 bg-ink-900/95 px-5 py-4 shadow-[var(--shadow-lift)] backdrop-blur sm:left-8"
+      >
+        <p class="font-display text-4xl leading-none text-brand-400">60s</p>
+        <p class="mt-1 text-xs uppercase tracking-[0.18em] text-steel-400">
+          Clear windshield
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hazard rule closing the hero -->
+  <div class="texture-hazard h-1.5 w-full opacity-70"></div>
+</section>

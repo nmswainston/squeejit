@@ -1,0 +1,36 @@
+---
+import SectionHeading from "../components/SectionHeading.astro";
+import { faq } from "../data/product";
+---
+
+<section id="faq" class="relative overflow-hidden bg-ink-950 py-20 lg:py-28">
+  <div class="shell max-w-3xl">
+    <SectionHeading eyebrow="Questions" heading="Before you buy" align="center" />
+
+    <!-- Native <details> — no JS, works before hydration, accessible by default. -->
+    <div class="mt-14 divide-y divide-ink-700 border-y border-ink-700">
+      {
+        faq.map((item) => (
+          <details class="group py-1">
+            <summary
+              class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-left font-display text-xl uppercase text-steel-200 transition-colors hover:text-white [&::-webkit-details-marker]:hidden"
+            >
+              {item.q}
+
+              <span
+                class="grid h-8 w-8 shrink-0 place-items-center border border-ink-600 text-brand-400 transition-transform duration-300 group-open:rotate-45"
+                aria-hidden="true"
+              >
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+                  <path d="M12 5v14M5 12h14" />
+                </svg>
+              </span>
+            </summary>
+
+            <p class="pb-6 pr-14 leading-relaxed text-steel-400">{item.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,46 @@
+---
+import SectionHeading from "../components/SectionHeading.astro";
+import ImageSlot from "../components/ImageSlot.astro";
+import { specs } from "../data/product";
+---
+
+<section id="specs" class="relative overflow-hidden bg-ink-900 py-20 lg:py-28">
+  <div class="shell grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
+    <div>
+      <SectionHeading
+        eyebrow="Specs"
+        heading="The numbers"
+        body="Everything you'd want on the back of the box."
+      />
+
+      <div class="reveal mt-10 hidden lg:block">
+        <ImageSlot
+          ratio="1 / 1"
+          alt="Squeejit bottle photographed with a scale reference"
+          note="SCALE SHOT — the bottle next to a common object (a 12 oz can, a phone) or tucked into a UTV door pocket. Sells 'it fits' better than a dimension ever will."
+        />
+      </div>
+    </div>
+
+    <div class="reveal">
+      <dl class="divide-y divide-ink-700 border-y border-ink-700">
+        {
+          specs.map((spec) => (
+            <div class="flex flex-wrap items-baseline justify-between gap-4 py-4">
+              <dt class="font-display text-base uppercase tracking-[0.14em] text-steel-400">
+                {spec.label}
+              </dt>
+              <dd class="text-right text-lg font-medium text-white">{spec.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+
+      <p class="mt-6 text-sm leading-relaxed text-steel-500">
+        <!-- TODO(client): every figure above is an estimate. Measure a
+             production unit and confirm the formula details before launch. -->
+        Specifications are provisional pending final production tooling.
+      </p>
+    </div>
+  </div>
+</section>

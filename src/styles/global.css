@@ -1,0 +1,219 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   Design tokens
+   The whole visual system lives here. Change these and the entire
+   page follows — nothing below hardcodes a brand color.
+   ------------------------------------------------------------------ */
+@theme {
+  /* Fonts */
+  --font-display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Base — gunmetal, not pure black. Pure black reads flat on phones. */
+  --color-ink-950: #080b0f;
+  --color-ink-900: #0d1218;
+  --color-ink-850: #121922;
+  --color-ink-800: #18212c;
+  --color-ink-700: #222d3b;
+  --color-ink-600: #31404f;
+
+  /* Muted text / rules */
+  --color-steel-500: #64748b;
+  --color-steel-400: #8496a8;
+  --color-steel-300: #aebcc9;
+  --color-steel-200: #d2dbe4;
+
+  /* Brand blue — pulled from the Squeejit bottle label */
+  --color-brand-300: #7cc6ff;
+  --color-brand-400: #38a3ff;
+  --color-brand-500: #0b84ef;
+  --color-brand-600: #0566c2;
+  --color-brand-700: #044c93;
+
+  /* Hazard orange — secondary punch, used sparingly for emphasis */
+  --color-hazard-400: #ff9147;
+  --color-hazard-500: #ff6a13;
+  --color-hazard-600: #d94f00;
+
+  /* Trail tan — dirt/mud accents in textures and rules */
+  --color-mud-500: #8a7550;
+
+  /* Shared shadows */
+  --shadow-lift: 0 18px 40px -18px rgb(0 0 0 / 0.85);
+  --shadow-glow: 0 0 0 1px --alpha(var(--color-brand-500) / 40%),
+    0 14px 34px -12px --alpha(var(--color-brand-500) / 45%);
+}
+
+/* ------------------------------------------------------------------
+   Base
+   ------------------------------------------------------------------ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Keeps anchored sections from hiding under the sticky nav. */
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-ink-950);
+    color: var(--color-steel-200);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    line-height: 0.95;
+    text-transform: uppercase;
+    color: white;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Visible focus ring for keyboard users on the dark ground. */
+  :focus-visible {
+    outline: 2px solid var(--color-brand-400);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: var(--color-brand-500);
+    color: white;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Reusable pieces
+   ------------------------------------------------------------------ */
+@layer components {
+  /* Standard page gutter + max width. Every section uses this. */
+  .shell {
+    width: 100%;
+    max-width: 80rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .shell { padding-inline: 2rem; }
+  }
+
+  /* Small uppercase label that sits above section headings. */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.875rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-brand-400);
+  }
+
+  .eyebrow::before {
+    content: "";
+    width: 1.75rem;
+    height: 2px;
+    background: var(--color-brand-500);
+  }
+
+  /* Angled section edge — the core "sporty" move. Applied to a section
+     so its top edge cuts on a diagonal instead of sitting flat. */
+  .cut-top {
+    clip-path: polygon(0 3.5vw, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .cut-bottom {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 3.5vw), 0 100%);
+  }
+
+  /* Skewed accent bar used behind headline fragments. */
+  .slash {
+    display: inline-block;
+    background: var(--color-brand-500);
+    transform: skewX(-12deg);
+    padding: 0 0.45em;
+    color: white;
+  }
+
+  .slash > span {
+    display: inline-block;
+    transform: skewX(12deg);
+  }
+}
+
+/* ------------------------------------------------------------------
+   Textures — layered as background images so no asset files are needed
+   ------------------------------------------------------------------ */
+@utility texture-grain {
+  position: relative;
+}
+
+@utility texture-grain-after {
+  content: "";
+}
+
+/* Faint topographic-style contour rings. Sits behind content. */
+@utility texture-topo {
+  background-image: repeating-radial-gradient(
+    circle at 22% 38%,
+    transparent 0,
+    transparent 38px,
+    --alpha(var(--color-brand-400) / 5%) 38px,
+    --alpha(var(--color-brand-400) / 5%) 40px
+  );
+}
+
+/* Diagonal hazard stripes — used on thin divider bars. */
+@utility texture-hazard {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--color-hazard-500) 0,
+    var(--color-hazard-500) 10px,
+    transparent 10px,
+    transparent 20px
+  );
+}
+
+/* ------------------------------------------------------------------
+   Motion — reveal-on-scroll, wired up in BaseLayout
+   ------------------------------------------------------------------ */
+@layer utilities {
+  .reveal {
+    opacity: 0;
+    transform: translateY(1.5rem);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .reveal,
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

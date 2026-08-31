@@ -1,0 +1,73 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import MobileBuyBar from "../components/MobileBuyBar.astro";
+
+import Hero from "../sections/Hero.astro";
+import Problem from "../sections/Problem.astro";
+import HowItWorks from "../sections/HowItWorks.astro";
+import Anatomy from "../sections/Anatomy.astro";
+import Features from "../sections/Features.astro";
+import Demo from "../sections/Demo.astro";
+import BuiltFor from "../sections/BuiltFor.astro";
+import Specs from "../sections/Specs.astro";
+import Reviews from "../sections/Reviews.astro";
+import Buy from "../sections/Buy.astro";
+import Faq from "../sections/Faq.astro";
+import FinalCta from "../sections/FinalCta.astro";
+
+import { site, faq } from "../data/product";
+
+/**
+ * Structured data.
+ *
+ * Deliberately omits `offers` and `aggregateRating`: prices aren't final
+ * and the on-page reviews are placeholders. Publishing either as schema
+ * would put unverified claims into search results.
+ * TODO(commerce): add an `offers` block once checkout and pricing are live.
+ */
+const productSchema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: site.name,
+  description: site.description,
+  brand: { "@type": "Brand", name: site.name },
+  category: "Automotive Glass Cleaner",
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: { "@type": "Answer", text: item.a },
+  })),
+};
+---
+
+<BaseLayout>
+  <Nav />
+
+  <main id="main">
+    <Hero />
+    <Problem />
+    <HowItWorks />
+    <Anatomy />
+    <Features />
+    <Demo />
+    <BuiltFor />
+    <Specs />
+    <Reviews />
+    <Buy />
+    <Faq />
+    <FinalCta />
+  </main>
+
+  <Footer />
+  <MobileBuyBar />
+
+  <script type="application/ld+json" set:html={JSON.stringify(productSchema)} is:inline />
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} is:inline />
+</BaseLayout>

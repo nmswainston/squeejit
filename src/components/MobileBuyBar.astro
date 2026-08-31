@@ -1,0 +1,66 @@
+---
+import { buy } from "../data/product";
+
+// Anchor price shown in the bar — the entry-level option.
+const from = buy.options[0]?.price ?? "";
+---
+
+<div
+  id="mobile-buy-bar"
+  class="fixed inset-x-0 bottom-0 z-40 translate-y-full border-t border-ink-700 bg-ink-900/95 backdrop-blur-md transition-transform duration-300 lg:hidden"
+>
+  <div class="shell flex items-center justify-between gap-4 py-3">
+    <div>
+      <p class="font-display text-lg uppercase leading-none text-white">Squeejit</p>
+      <p class="text-sm text-steel-400">From {from}</p>
+    </div>
+
+    <a
+      href="#buy"
+      class="bg-brand-500 px-6 py-3 font-display text-base font-bold uppercase tracking-wider text-white [clip-path:polygon(0.6rem_0,100%_0,100%_calc(100%-0.6rem),calc(100%-0.6rem)_100%,0_100%,0_0.6rem)]"
+    >
+      Get yours
+    </a>
+  </div>
+</div>
+
+<script>
+  // Slide the bar up once the hero is out of view, and tuck it away again
+  // when the real buy section is on screen (two CTAs competing looks bad).
+  const bar = document.getElementById("mobile-buy-bar");
+  const hero = document.getElementById("top");
+  const buySection = document.getElementById("buy");
+
+  if (bar && "IntersectionObserver" in window) {
+    let pastHero = false;
+    let atBuy = false;
+
+    const sync = () => {
+      bar.classList.toggle("translate-y-full", !pastHero || atBuy);
+    };
+
+    if (hero) {
+      new IntersectionObserver(
+        ([entry]) => {
+          pastHero = !entry.isIntersecting;
+          sync();
+        },
+        { threshold: 0 },
+      ).observe(hero);
+    }
+
+    if (buySection) {
+      // A ratio threshold is wrong here: the buy section is taller than a
+      // phone viewport, so even filling the screen it never reaches 20% of
+      // its own height. Measure how much of the VIEWPORT it covers instead.
+      new IntersectionObserver(
+        ([entry]) => {
+          const covered = entry.intersectionRect.height / window.innerHeight;
+          atBuy = entry.isIntersecting && covered > 0.5;
+          sync();
+        },
+        { threshold: [0, 0.1, 0.25, 0.5, 0.75, 1] },
+      ).observe(buySection);
+    }
+  }
+</script>

@@ -1,0 +1,104 @@
+---
+import SectionHeading from "../components/SectionHeading.astro";
+import ImageSlot from "../components/ImageSlot.astro";
+import { demo } from "../data/product";
+---
+
+<section id="demo" class="relative overflow-hidden bg-ink-900 py-20 lg:py-28">
+  <div class="shell">
+    <SectionHeading
+      eyebrow={demo.eyebrow}
+      heading={demo.heading}
+      body={demo.body}
+      align="center"
+    />
+
+    <!--
+      Before/after comparison. The "after" image sits underneath; the
+      "before" image on top is clipped by a CSS variable the range input
+      drives. Using a real <input type="range"> keeps it keyboard-operable
+      and touch-friendly for free.
+    -->
+    <figure
+      id="compare"
+      class="reveal relative mx-auto mt-14 max-w-4xl select-none border border-ink-700"
+      style="--split: 50%"
+    >
+      <!-- After (bottom layer) -->
+      <ImageSlot
+        ratio="16 / 9"
+        alt="Windshield after cleaning with Squeejit"
+        note="AFTER — same windshield, same camera position, mud gone. Locked tripod between the two shots is essential or the wipe effect breaks."
+        class="border-0"
+      />
+
+      <!-- Before (top layer, clipped) -->
+      <div
+        class="absolute inset-0 overflow-hidden"
+        style="clip-path: inset(0 calc(100% - var(--split)) 0 0)"
+        data-compare-before
+      >
+        <ImageSlot
+          ratio="16 / 9"
+          alt="Windshield before cleaning, covered in mud"
+          note="BEFORE — the muddy state. Must be the identical framing to the after shot."
+          class="h-full border-0 bg-mud-500/15"
+        />
+      </div>
+
+      <!-- Divider handle -->
+      <div
+        class="pointer-events-none absolute inset-y-0 z-10 w-0.5 bg-brand-400"
+        style="left: var(--split)"
+        aria-hidden="true"
+      >
+        <span
+          class="absolute top-1/2 left-1/2 grid h-12 w-12 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border-2 border-brand-400 bg-ink-950 shadow-[var(--shadow-glow)]"
+        >
+          <svg class="h-5 w-5 text-brand-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9 6-5 6 5 6M15 6l5 6-5 6"></path>
+          </svg>
+        </span>
+      </div>
+
+      <!-- Labels -->
+      <span
+        class="pointer-events-none absolute left-4 top-4 bg-ink-950/85 px-3 py-1.5 font-display text-sm uppercase tracking-[0.18em] text-steel-300"
+        >{demo.beforeLabel}</span
+      >
+      <span
+        class="pointer-events-none absolute right-4 top-4 bg-brand-500 px-3 py-1.5 font-display text-sm uppercase tracking-[0.18em] text-white"
+        >{demo.afterLabel}</span
+      >
+
+      <!-- The actual control: full-bleed, invisible, fully accessible -->
+      <input
+        id="compare-range"
+        type="range"
+        min="0"
+        max="100"
+        value="50"
+        step="0.5"
+        aria-label="Reveal the windshield before and after cleaning"
+        class="absolute inset-0 z-20 h-full w-full cursor-ew-resize appearance-none bg-transparent opacity-0"
+      />
+    </figure>
+
+    <figcaption class="reveal mx-auto mt-4 max-w-4xl text-center text-sm text-steel-500">
+      Drag the handle, or focus it and use the arrow keys.
+      <!-- TODO(client): if a demo video exists, swap this comparison for it —
+           video converts better than a static before/after. -->
+    </figcaption>
+  </div>
+</section>
+
+<script>
+  const figure = document.getElementById("compare");
+  const range = document.getElementById("compare-range") as HTMLInputElement | null;
+
+  if (figure && range) {
+    const sync = () => figure.style.setProperty("--split", `${range.value}%`);
+    range.addEventListener("input", sync);
+    sync();
+  }
+</script>

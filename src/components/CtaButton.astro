@@ -1,0 +1,58 @@
+---
+interface Props {
+  href?: string;
+  variant?: "primary" | "ghost" | "hazard";
+  size?: "md" | "lg";
+  class?: string;
+  /** Renders a <button> instead of an <a>. Used by the placeholder buy CTAs. */
+  asButton?: boolean;
+}
+
+const {
+  href = "#buy",
+  variant = "primary",
+  size = "md",
+  class: className = "",
+  asButton = false,
+} = Astro.props;
+
+const base =
+  "group relative inline-flex items-center justify-center gap-2 font-display font-bold uppercase tracking-wider transition duration-200 [clip-path:polygon(0.75rem_0,100%_0,100%_calc(100%-0.75rem),calc(100%-0.75rem)_100%,0_100%,0_0.75rem)] focus-visible:outline-offset-4";
+
+const sizes = {
+  md: "px-6 py-3 text-base",
+  lg: "px-8 py-4 text-lg sm:text-xl",
+};
+
+const variants = {
+  primary:
+    "bg-brand-500 text-white shadow-[var(--shadow-glow)] hover:bg-brand-400 hover:-translate-y-0.5 active:translate-y-0",
+  hazard:
+    "bg-hazard-500 text-ink-950 hover:bg-hazard-400 hover:-translate-y-0.5 active:translate-y-0",
+  ghost:
+    "border-2 border-ink-600 bg-ink-900/60 text-steel-200 backdrop-blur hover:border-brand-500 hover:text-white",
+};
+
+const cls = [base, sizes[size], variants[variant], className].join(" ");
+const Tag = asButton ? "button" : "a";
+---
+
+<Tag
+  class={cls}
+  {...asButton ? { type: "button" } : { href }}
+>
+  <slot />
+  <svg
+    class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
+    viewBox="0 0 16 16"
+    fill="none"
+    aria-hidden="true"
+  >
+    <path
+      d="M2 8h11m0 0-4-4m4 4-4 4"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"></path>
+  </svg>
+</Tag>

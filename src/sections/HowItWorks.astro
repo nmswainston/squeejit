@@ -1,0 +1,68 @@
+---
+import SectionHeading from "../components/SectionHeading.astro";
+import ImageSlot from "../components/ImageSlot.astro";
+import CtaButton from "../components/CtaButton.astro";
+import { steps } from "../data/product";
+---
+
+<!--
+  The heart of the page. The entire product proposition is "one bottle
+  replaces three things you don't have on the trail" — this section is
+  where that lands, so it gets the most visual weight.
+-->
+<section
+  id="how-it-works"
+  class="cut-top relative -mt-[3.5vw] overflow-hidden bg-ink-950 pb-20 pt-[calc(3.5vw+5rem)] lg:pb-28"
+>
+  <div class="texture-topo absolute inset-0 opacity-40"></div>
+
+  <div class="shell relative">
+    <SectionHeading
+      eyebrow="How it works"
+      heading="Squirt. Scrub. Squeegee."
+      body="Three motions, one hand, sixty seconds. No bucket, no hose, no towel wadded up in the footwell."
+      align="center"
+    />
+
+    <ol class="mt-16 grid gap-8 md:grid-cols-3">
+      {
+        steps.map((step, i) => (
+          <li
+            class="reveal group relative flex flex-col overflow-hidden border border-ink-700 bg-ink-900 transition-colors duration-300 hover:border-brand-600"
+            style={`transition-delay: ${i * 90}ms`}
+          >
+            {/* Step number tab, pinned over the photo */}
+            <span
+              class="pointer-events-none absolute left-0 top-6 z-10 -skew-x-12 bg-brand-500 py-2 pl-5 pr-4 font-display text-2xl font-extrabold leading-none text-white shadow-[var(--shadow-lift)] transition-colors duration-300 group-hover:bg-hazard-500 group-hover:text-ink-950"
+              aria-hidden="true"
+            >
+              <span class="block skew-x-12">{step.n}</span>
+            </span>
+
+            <ImageSlot
+              ratio="4 / 3"
+              alt={`${step.title} — step ${step.n}`}
+              note={`STEP ${step.n} — tight action shot of the "${step.title.toLowerCase()}" motion. Same rig, same light across all three so they read as a sequence.`}
+              class="border-0 border-b-2"
+            />
+
+            <div class="relative flex-1 p-7">
+              <h3 class="text-3xl text-white">{step.title}</h3>
+              <p class="mt-3 leading-relaxed text-steel-400">{step.body}</p>
+            </div>
+
+            {/* Blue underline that fills on hover */}
+            <span
+              class="absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-brand-500 transition-transform duration-300 group-hover:scale-x-100"
+              aria-hidden="true"
+            />
+          </li>
+        ))
+      }
+    </ol>
+
+    <div class="reveal mt-14 text-center">
+      <CtaButton href="#buy" size="lg">Get yours</CtaButton>
+    </div>
+  </div>
+</section>
