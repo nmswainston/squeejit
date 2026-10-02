@@ -239,7 +239,7 @@ export const buy = {
       id: "double",
       name: "Trail Pack",
       blurb: "One for the rig, one for the chase truck.",
-      price: "$44",
+      price: "$42",
       compareAt: "$48",
       badge: "Most popular",
       includes: ["2x Squeejit, filled", "16 oz cleaner total", "Free shipping"],
@@ -282,6 +282,10 @@ export const faq = [
   {
     q: "What's your return policy?",
     a: "Forty-five days. If it doesn't earn its spot in your door pocket, send it back for a full refund.",
+  },
+  {
+    q: "Does it work on ceramic-coated glass?",
+    a: "Yes. The formula is safe on ceramic coatings.",
   },
 ];
 
