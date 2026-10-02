@@ -38,7 +38,7 @@ export const nav = [
 ];
 
 export const hero = {
-  eyebrow: "Built for the rough stuff",
+  eyebrow: "Built for the trail",
   headlinePre: "Mud on,",
   headlineSlash: "mud off.",
   sub:
