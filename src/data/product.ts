@@ -222,7 +222,7 @@ export const buy = {
       id: "single",
       name: "Single",
       blurb: "One bottle, filled and ready.",
-      price: "$24",
+      price: "$26",
       compareAt: null,
       badge: null,
       includes: ["1x Squeejit, filled", "8 oz cleaner"],
