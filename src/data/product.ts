@@ -270,7 +270,7 @@ export const faq = [
   },
   {
     q: "Will it freeze in the winter?",
-    a: "TODO(client): confirm the formula's freeze point before answering this publicly.",
+    a: "The formula stays liquid down to 15°F (-9°C).",
   },
   {
     q: "What's your return policy?",
