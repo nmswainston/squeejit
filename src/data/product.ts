@@ -215,7 +215,7 @@ export const reviews = {
 export const buy = {
   eyebrow: "Get one",
   heading: "Pick your setup",
-  note: "Free shipping on orders over $50. 30-day money-back guarantee.",
+  note: "Free shipping on orders over $50. 45-day money-back guarantee.",
   // TODO(client): confirm final pricing and SKU names
   options: [
     {
@@ -274,7 +274,7 @@ export const faq = [
   },
   {
     q: "What's your return policy?",
-    a: "Thirty days. If it doesn't earn its spot in your door pocket, send it back for a full refund.",
+    a: "Forty-five days. If it doesn't earn its spot in your door pocket, send it back for a full refund.",
   },
 ];
 
