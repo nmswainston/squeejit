@@ -209,6 +209,13 @@ export const reviews = {
       location: "Sand Hollow, UT",
       rating: 5,
     },
+    {
+      quote:
+        "Took the Squeejit to Moab and it paid for itself on day one.",
+      name: "Jordan M.",
+      location: "Moab, UT",
+      rating: 5,
+    },
   ],
 };
 
