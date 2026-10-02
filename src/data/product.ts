@@ -239,7 +239,7 @@ export const buy = {
       id: "double",
       name: "Trail Pack",
       blurb: "One for the rig, one for the chase truck.",
-      price: "$42",
+      price: "$44",
       compareAt: "$48",
       badge: "Most popular",
       includes: ["2x Squeejit, filled", "20 oz cleaner total", "Free shipping"],
