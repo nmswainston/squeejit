@@ -249,7 +249,7 @@ export const buy = {
       id: "refill",
       name: "Refill Kit",
       blurb: "For riders who already have the tool.",
-      price: "$25",
+      price: "$35",
       compareAt: null,
       badge: null,
       includes: ["1x Squeejit, filled", "1 gallon refill concentrate"],
