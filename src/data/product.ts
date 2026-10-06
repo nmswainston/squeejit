@@ -1,5 +1,5 @@
 /**
- * Every piece of marketing copy on the page lives here.
+ * Every piece of marketing copy on the page lives here, except the menu, which has its own file (nav.ts).
  *
  * This is deliberately the only file a non-developer needs to touch to
  * change wording, pricing, specs or FAQ answers. All copy below is
@@ -28,14 +28,6 @@ export const site = {
 export const credit = {
   url: "",
 };
-
-export const nav = [
-  { label: "How it works", href: "#how-it-works" },
-  { label: "Features", href: "#features" },
-  { label: "Specs", href: "#specs" },
-  { label: "Reviews", href: "#reviews" },
-  { label: "FAQ", href: "#faq" },
-];
 
 export const hero = {
   eyebrow: "Built for the trail",
