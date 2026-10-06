@@ -36,7 +36,8 @@ npm run check     # Astro + TypeScript diagnostics
 
 ```
 src/
-├── data/product.ts        # ALL page copy lives here
+├── data/product.ts        # ALL page copy lives here, except the menu
+├── data/nav.ts            # the menu (its own file so a menu change is easy to spot)
 ├── styles/global.css      # design tokens (colors, fonts, textures)
 ├── layouts/BaseLayout.astro
 ├── pages/index.astro      # section order
