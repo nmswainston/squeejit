@@ -65,7 +65,7 @@ export const problem = {
 export const steps = [
   {
     n: "01",
-    title: "Squirt",
+    title: "Spray",
     body:
       "Flip the cap and lay a line of cleaner across the glass. The twist-top puts it exactly where you want it. No wind-blown spray, no wasted product.",
   },
